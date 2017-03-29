@@ -13,7 +13,7 @@ from tensorflow.contrib import learn
 # ==================================================
 
 # Data loading params
-tf.flags.DEFINE_float("dev_sample_percentage", .1, "Percentage of the training data to use for validation")
+tf.flags.DEFINE_float("dev_sample_percentage", .15, "Percentage of the training data to use for validation")
 tf.flags.DEFINE_string("positive_data_file", "./fishing_data/pos.txt", "Data source for the positive data.")
 tf.flags.DEFINE_string("negative_data_file", "./fishing_data/neg.txt", "Data source for the negative data.")
 
