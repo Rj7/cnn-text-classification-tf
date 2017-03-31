@@ -135,7 +135,7 @@ with tf.Graph().as_default():
         # Initialize all variables
         sess.run(tf.global_variables_initializer())
 
-        def train_step(x_batch, y_batch):
+        def train_step(x_batch, y_batch, should_print = False):
             """
             A single training step
             """
@@ -148,7 +148,8 @@ with tf.Graph().as_default():
                 [train_op, global_step, train_summary_op, cnn.loss, cnn.accuracy],
                 feed_dict)
             time_str = datetime.datetime.now().isoformat()
-            print("{}: step {}, loss {:g}, acc {:g}".format(time_str, step, loss, accuracy))
+            if should_print:
+                print("{}: step {}, loss {:g}, acc {:g}".format(time_str, step, loss, accuracy))
             train_summary_writer.add_summary(summaries, step)
 
         def dev_step(x_batch, y_batch, writer=None):
@@ -178,6 +179,7 @@ with tf.Graph().as_default():
             current_step = tf.train.global_step(sess, global_step)
             if current_step % FLAGS.evaluate_every == 0:
                 print("\nEvaluation:")
+                train_step(x_batch, y_batch, True)
                 dev_step(x_dev, y_dev, writer=dev_summary_writer)
                 print("")
             if current_step % FLAGS.checkpoint_every == 0:
