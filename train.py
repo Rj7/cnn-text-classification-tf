@@ -175,11 +175,13 @@ with tf.Graph().as_default():
         # Training loop. For each batch...
         for batch in batches:
             x_batch, y_batch = zip(*batch)
-            train_step(x_batch, y_batch)
+            if current_step % FLAGS.evaluate_every == 0:
+                train_step(x_batch, y_batch, True)
+            else:
+                train_step(x_batch, y_batch)
             current_step = tf.train.global_step(sess, global_step)
             if current_step % FLAGS.evaluate_every == 0:
                 print("\nEvaluation:")
-                train_step(x_batch, y_batch, True)
                 dev_step(x_dev, y_dev, writer=dev_summary_writer)
                 print("")
             if current_step % FLAGS.checkpoint_every == 0:
