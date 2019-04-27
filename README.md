@@ -1,4 +1,4 @@
-## Why do we need a fishing relevance classifier?
+## Youtube fishing relevance classifier
 Although we search Youtube with "fishing" as the query term we are not guaranteed to get only fishing related videos. We get videos about persons who like to fish, a property near lake ideal for fishing, guys fishing for girls etc.. So a lot of videos that were posted on our site were not really fishing related one's. A simple script which looks for terms like ["fishing", "salmon", "musky" etc..... ] didn't work well. Hence the classifier.
 
 The classifier was written using convolution neural network using tensorflow. We took the code for this [awesome blog](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/) and tried to change few hyper-parameters and get good accuracy. The original code is a sentiment classifier which can also be used for fishing relevance classification. 
